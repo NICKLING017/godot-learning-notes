@@ -66,10 +66,51 @@
               },
               "pinned": true,
               "icon": "terminal",
-              "title": "终端：OC | 终端插件界面问题与配置错误排查"
+              "title": "终端：选择 C:\\WINDOWS\\system32\\cmd.exe"
+            }
+          },
+          {
+            "id": "006d227d09da8eac",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "terminal:terminal",
+              "state": {
+                "terminal:terminal": {
+                  "cwd": "C:\\Obsidian\\Godot学习笔记",
+                  "focus": false,
+                  "profile": {
+                    "args": [],
+                    "executable": "C:\\Windows\\System32\\cmd.exe",
+                    "followTheme": true,
+                    "name": "",
+                    "platforms": {
+                      "win32": true
+                    },
+                    "pythonExecutable": "python3",
+                    "restoreHistory": false,
+                    "rightClickAction": "copyPaste",
+                    "successExitCodes": [
+                      "0",
+                      "SIGINT",
+                      "SIGTERM"
+                    ],
+                    "terminalOptions": {
+                      "documentOverride": null
+                    },
+                    "type": "integrated",
+                    "useWin32Conhost": true
+                  },
+                  "serial": null
+                }
+              },
+              "pinned": true,
+              "icon": "terminal",
+              "title": "终端：Windows PowerShell"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -221,7 +262,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 656.5
+    "width": 387.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -237,7 +278,7 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "2f3217a2a04068f9",
+  "active": "006d227d09da8eac",
   "lastOpenFiles": [
     "vampire-survivor-solo项目学习/05_资源系统/AbilityUpgrade资源定义.md",
     "vampire-survivor-solo项目学习/01_项目架构/组件化设计模式.md",
