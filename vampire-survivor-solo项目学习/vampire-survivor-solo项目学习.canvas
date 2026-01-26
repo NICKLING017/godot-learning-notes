@@ -1,186 +1,25 @@
 {
 	"nodes":[
-		{
-			"id":"main_overview",
-			"type":"text",
-			"text":"# vampire-survivor-solo 项目学习\n\n## 项目概述\n\n基于 Godot 4.x 开发的吸血鬼幸存者类游戏\n\n**核心特性**：\n- 组件化设计模式（Composition over Inheritance）\n- 事件总线全局通信系统\n- 资源驱动开发（自定义资源）\n- 技能与控制分离架构\n\n**学习目标**：\n掌握 Godot 高级架构设计和系统拆分能力",
-			"x":340,
-			"y":-60,
-			"width":580,
-			"height":250,
-			"color":"5"
-		},
-		{
-			"id":"architecture",
-			"type":"text",
-			"text":"## 组件化架构设计\n\n### 核心思想\n\"组合优于继承\" - 通过组合通用组件赋予实体能力\n\n### 目录结构设计\n```\nvampire-survivor-solo/\n├── scenes/component/    # 通用组件\n├── scenes/manager/      # 游戏管理器\n├── scenes/ability/      # 技能系统\n├── Resources/           # 自定义资源\n└── autoload/           # 全局单例\n```\n\n### 优势\n1. **按需组合** - 功能模块化\n2. **易于维护** - 修改影响局部\n3. **便于测试** - 组件独立测试\n4. **灵活扩展** - 新增组件不影响现有",
-			"x":-200,
-			"y":-200,
-			"width":350,
-			"height":400,
-			"color":"4"
-		},
-		{
-			"id":"core_components",
-			"type":"text",
-			"text":"## 核心组件系统\n\n### 1. HealthComponent\n- 生命值管理\n- 负数治疗机制\n- 延迟死亡检查（call_deferred）\n- 多信号分离（died, health_changed, health_decreased）\n\n### 2. VelocityComponent\n- 移动物理控制\n- 速度与方向管理\n\n### 3. HitBox-HurtBox\n- 碰撞检测分离\n- 攻击与受击责任分离\n\n### 4. DeathComponent\n- 统一死亡处理接口\n- 死亡特效与资源释放",
-			"x":-400,
-			"y":300,
-			"width":570,
-			"height":450,
-			"color":"3"
-		},
-		{
-			"id":"game_management",
-			"type":"text",
-			"text":"## 游戏管理系统\n\n### 1. ArenaTimeManager\n- 时间与难度控制\n- 随时间增加敌人数量和强度\n\n### 2. EnemyManager\n- 敌人生成与波次管理\n- 生成位置随机分布\n\n### 3. ExperienceManager\n- 经验收集系统\n- 升级触发逻辑\n\n### 4. UpgradeManager\n- 升级选择界面\n- 能力增强系统\n- 资源驱动升级定义",
-			"x":250,
-			"y":380,
-			"width":810,
-			"height":350,
-			"color":"1"
-		},
-		{
-			"id":"ability_system",
-			"type":"text",
-			"text":"## 技能系统\n\n### Controller-Ability分离架构\n- **Controller**：控制逻辑（发射频率、方向）\n- **Ability**：效果逻辑（伤害、范围、特效）\n\n### 索敌逻辑与距离优化\n- **性能优化**：避免平方根运算\n```gdscript\n# 优化前：使用 distance_to()\nif position.distance_to(target_position) < range:\n    # ...\n\n# 优化后：使用 length_squared()\nif position.distance_squared_to(target_position) < range * range:\n    # ...\n```\n- **寻敌策略**：最近目标优先",
-			"x":1020,
-			"y":-60,
-			"width":720,
-			"height":300,
-			"color":"6"
-		},
-		{
-			"id":"resource_system",
-			"type":"text",
-			"text":"## 资源系统\n\n### 自定义资源（CustomResources）\n- 扩展 Resource 类定义游戏数据\n- 编辑器内可视化编辑\n\n### AbilityUpgrade 资源定义\n```gdscript\nextends Resource\nclass_name AbilityUpgrade\n\n@export var id: String\n@export var name: String\n@export var max_quantity: int = 1\n@export var description: String\n```\n\n### 优势\n1. **数据驱动** - 游戏逻辑与数据分离\n2. **编辑器友好** - 可视化配置\n3. **易于修改** - 无需重新编译\n4. **版本控制** - 纯文本资源文件",
-			"x":1140,
-			"y":350,
-			"width":400,
-			"height":300,
-			"color":"2"
-		},
-		{
-			"id":"programming_tips",
-			"type":"text",
-			"text":"## 编程技巧\n\n### 距离计算性能优化\n- **问题**：`distance_to()` 包含平方根计算，性能开销大\n- **解决**：使用 `distance_squared_to()` 比较平方距离\n\n### call_deferred 延迟执行\n- **问题**：信号回调中直接 `queue_free()` 可能导致访问失效\n- **解决**：使用 `Callable(func).call_deferred()` 延迟执行\n\n### 事件总线模式（GameEvents）\n- 全局单例管理事件\n- 组件间松耦合通信\n- 避免节点间直接引用",
-			"x":690,
-			"y":1240,
-			"width":850,
-			"height":200,
-			"color":"5"
-		},
-		{
-			"id":"practical_summary",
-			"type":"text",
-			"text":"## 实战总结\n\n### 项目亮点\n1. **架构清晰** - 组件化设计使代码结构清晰\n2. **系统完整** - 涵盖游戏开发核心系统\n3. **性能优化** - 关键路径有针对性优化\n\n### 学习收获\n1. **设计模式应用** - 组件化、事件总线、资源驱动\n2. **Godot 高级特性** - 自定义资源、信号系统、自动加载\n3. **工程化思维** - 目录结构、模块分离、可维护性\n\n### 扩展思考\n1. 新增角色和技能类型\n2. 添加网络多人协作\n3. 实现更复杂的升级树\n4. 添加剧情和任务系统",
-			"x":340,
-			"y":900,
-			"width":580,
-			"height":300,
-			"color":"2"
-		},
-		{
-			"id":"key_insights",
-			"type":"text",
-			"text":"## 💡 核心洞见\n\n### 架构设计原则\n| 原则 | 应用 | 效果 |\n|------|------|------|\n| **组合优于继承** | 组件化设计 | 灵活、可维护 |\n| **关注点分离** | Controller-Ability 分离 | 逻辑清晰、易扩展 |\n| **数据驱动** | 自定义资源 | 配置灵活、易调整 |\n| **松耦合通信** | 事件总线模式 | 组件独立、易测试 |\n\n### 开发效率技巧\n1. **组件复用** - 一次开发，多处使用\n2. **资源驱动** - 策划可独立调整数值\n3. **信号解耦** - 减少组件间直接依赖\n4. **性能优化** - 关键路径针对性优化\n\n### 常见陷阱\n1. 过度继承导致代码僵化\n2. 直接节点引用导致耦合过高\n3. 忽略性能敏感操作（如平方根计算）\n4. 在信号回调中直接销毁节点",
-			"x":690,
-			"y":1500,
-			"width":850,
-			"height":250,
-			"color":"5"
-		}
+		{"id":"main_overview","type":"text","text":"# vampire-survivor-solo 项目学习\n\n## 项目概述\n\n基于 Godot 4.x 开发的吸血鬼幸存者类游戏\n\n**核心特性**：\n- 组件化设计模式（Composition over Inheritance）\n- 事件总线全局通信系统\n- 资源驱动开发（自定义资源）\n- 技能与控制分离架构\n\n**学习目标**：\n掌握 Godot 高级架构设计和系统拆分能力","x":340,"y":-60,"width":580,"height":250,"color":"5"},
+		{"id":"architecture","type":"text","text":"## 组件化架构设计\n\n### 核心思想\n\"组合优于继承\" - 通过组合通用组件赋予实体能力\n\n### 目录结构设计\n```\nvampire-survivor-solo/\n├── scenes/component/    # 通用组件\n├── scenes/manager/      # 游戏管理器\n├── scenes/ability/      # 技能系统\n├── Resources/           # 自定义资源\n└── autoload/           # 全局单例\n```\n\n### 优势\n1. **按需组合** - 功能模块化\n2. **易于维护** - 修改影响局部\n3. **便于测试** - 组件独立测试\n4. **灵活扩展** - 新增组件不影响现有","x":-200,"y":-200,"width":350,"height":400,"color":"4"},
+		{"id":"core_components","type":"text","text":"## 核心组件系统\n\n### 1. HealthComponent\n- 生命值管理\n- 负数治疗机制\n- 延迟死亡检查（call_deferred）\n- 多信号分离（died, health_changed, health_decreased）\n\n### 2. VelocityComponent\n- 移动物理控制\n- 速度与方向管理\n\n### 3. HitBox-HurtBox\n- 碰撞检测分离\n- 攻击与受击责任分离\n\n### 4. DeathComponent\n- 统一死亡处理接口\n- 死亡特效与资源释放","x":-400,"y":300,"width":570,"height":450,"color":"3"},
+		{"id":"game_management","type":"text","text":"## 游戏管理系统\n\n### 1. ArenaTimeManager\n- 时间与难度控制\n- 随时间增加敌人数量和强度\n\n### 2. EnemyManager\n- 敌人生成与波次管理\n- 生成位置随机分布\n\n### 3. ExperienceManager\n- 经验收集系统\n- 升级触发逻辑\n\n### 4. UpgradeManager\n- 升级选择界面\n- 能力增强系统\n- 资源驱动升级定义","x":250,"y":380,"width":810,"height":350,"color":"1"},
+		{"id":"ability_system","type":"text","text":"## 技能系统\n\n### Controller-Ability分离架构\n- **Controller**：控制逻辑（发射频率、方向）\n- **Ability**：效果逻辑（伤害、范围、特效）\n\n### 索敌逻辑与距离优化\n- **性能优化**：避免平方根运算\n```gdscript\n# 优化前：使用 distance_to()\nif position.distance_to(target_position) < range:\n    # ...\n\n# 优化后：使用 length_squared()\nif position.distance_squared_to(target_position) < range * range:\n    # ...\n```\n- **寻敌策略**：最近目标优先","x":1020,"y":-60,"width":720,"height":300,"color":"6"},
+		{"id":"resource_system","type":"text","text":"## 资源系统\n\n### 自定义资源（CustomResources）\n- 扩展 Resource 类定义游戏数据\n- 编辑器内可视化编辑\n\n### AbilityUpgrade 资源定义\n```gdscript\nextends Resource\nclass_name AbilityUpgrade\n\n@export var id: String\n@export var name: String\n@export var max_quantity: int = 1\n@export var description: String\n```\n\n### 优势\n1. **数据驱动** - 游戏逻辑与数据分离\n2. **编辑器友好** - 可视化配置\n3. **易于修改** - 无需重新编译\n4. **版本控制** - 纯文本资源文件","x":1140,"y":350,"width":400,"height":300,"color":"2"},
+		{"id":"programming_tips","type":"text","text":"## 编程技巧\n\n### 距离计算性能优化\n- **问题**：`distance_to()` 包含平方根计算，性能开销大\n- **解决**：使用 `distance_squared_to()` 比较平方距离\n\n### call_deferred 延迟执行\n- **问题**：信号回调中直接 `queue_free()` 可能导致访问失效\n- **解决**：使用 `Callable(func).call_deferred()` 延迟执行\n\n### 事件总线模式（GameEvents）\n- 全局单例管理事件\n- 组件间松耦合通信\n- 避免节点间直接引用","x":690,"y":1240,"width":850,"height":200,"color":"5"},
+		{"id":"practical_summary","type":"text","text":"## 实战总结\n\n### 项目亮点\n1. **架构清晰** - 组件化设计使代码结构清晰\n2. **系统完整** - 涵盖游戏开发核心系统\n3. **性能优化** - 关键路径有针对性优化\n\n### 学习收获\n1. **设计模式应用** - 组件化、事件总线、资源驱动\n2. **Godot 高级特性** - 自定义资源、信号系统、自动加载\n3. **工程化思维** - 目录结构、模块分离、可维护性\n\n### 扩展思考\n1. 新增角色和技能类型\n2. 添加网络多人协作\n3. 实现更复杂的升级树\n4. 添加剧情和任务系统","x":340,"y":900,"width":580,"height":300,"color":"2"},
+		{"id":"key_insights","type":"text","text":"## 💡 核心洞见\n\n### 架构设计原则\n| 原则 | 应用 | 效果 |\n|------|------|------|\n| **组合优于继承** | 组件化设计 | 灵活、可维护 |\n| **关注点分离** | Controller-Ability 分离 | 逻辑清晰、易扩展 |\n| **数据驱动** | 自定义资源 | 配置灵活、易调整 |\n| **松耦合通信** | 事件总线模式 | 组件独立、易测试 |\n\n### 开发效率技巧\n1. **组件复用** - 一次开发，多处使用\n2. **资源驱动** - 策划可独立调整数值\n3. **信号解耦** - 减少组件间直接依赖\n4. **性能优化** - 关键路径针对性优化\n\n### 常见陷阱\n1. 过度继承导致代码僵化\n2. 直接节点引用导致耦合过高\n3. 忽略性能敏感操作（如平方根计算）\n4. 在信号回调中直接销毁节点","x":690,"y":1500,"width":850,"height":250,"color":"5"}
 	],
 	"edges":[
-		{
-			"id":"edge1",
-			"fromNode":"architecture",
-			"fromSide":"right",
-			"toNode":"main_overview",
-			"toSide":"left",
-			"color":"4",
-			"label":"架构"
-		},
-		{
-			"id":"edge2",
-			"fromNode":"main_overview",
-			"fromSide":"right",
-			"toNode":"ability_system",
-			"toSide":"left",
-			"color":"5",
-			"label":"技能"
-		},
-		{
-			"id":"edge3",
-			"fromNode":"main_overview",
-			"fromSide":"bottom",
-			"toNode":"game_management",
-			"toSide":"top",
-			"color":"1",
-			"label":"管理"
-		},
-		{
-			"id":"edge4",
-			"fromNode":"ability_system",
-			"fromSide":"bottom",
-			"toNode":"resource_system",
-			"toSide":"top",
-			"color":"2",
-			"label":"资源"
-		},
-		{
-			"id":"edge5",
-			"fromNode":"architecture",
-			"fromSide":"bottom",
-			"toNode":"core_components",
-			"toSide":"top",
-			"color":"3",
-			"label":"组件"
-		},
-		{
-			"id":"edge6",
-			"fromNode":"game_management",
-			"fromSide":"bottom",
-			"toNode":"practical_summary",
-			"toSide":"top",
-			"color":"2",
-			"label":"总结"
-		},
-		{
-			"id":"edge7",
-			"fromNode":"practical_summary",
-			"fromSide":"bottom",
-			"toNode":"programming_tips",
-			"toSide":"top",
-			"color":"5",
-			"label":"技巧"
-		},
-		{
-			"id":"edge8",
-			"fromNode":"programming_tips",
-			"fromSide":"bottom",
-			"toNode":"key_insights",
-			"toSide":"top",
-			"color":"5",
-			"label":"洞见"
-		},
-		{
-			"id":"edge9",
-			"fromNode":"core_components",
-			"fromSide":"right",
-			"toNode":"game_management",
-			"toSide":"left",
-			"color":"3",
-			"label":"支撑"
-		},
-		{
-			"id":"edge10",
-			"fromNode":"resource_system",
-			"fromSide":"bottom",
-			"toNode":"practical_summary",
-			"toSide":"top",
-			"color":"2",
-			"label":"应用"
-		}
+		{"id":"edge1","fromNode":"architecture","fromSide":"right","toNode":"main_overview","toSide":"left","color":"4","label":"架构"},
+		{"id":"edge2","fromNode":"main_overview","fromSide":"right","toNode":"ability_system","toSide":"left","color":"5","label":"技能"},
+		{"id":"edge3","fromNode":"main_overview","fromSide":"bottom","toNode":"game_management","toSide":"top","color":"1","label":"管理"},
+		{"id":"edge4","fromNode":"ability_system","fromSide":"bottom","toNode":"resource_system","toSide":"top","color":"2","label":"资源"},
+		{"id":"edge5","fromNode":"architecture","fromSide":"bottom","toNode":"core_components","toSide":"top","color":"3","label":"组件"},
+		{"id":"edge6","fromNode":"game_management","fromSide":"bottom","toNode":"practical_summary","toSide":"top","color":"2","label":"总结"},
+		{"id":"edge7","fromNode":"practical_summary","fromSide":"bottom","toNode":"programming_tips","toSide":"top","color":"5","label":"技巧"},
+		{"id":"edge8","fromNode":"programming_tips","fromSide":"bottom","toNode":"key_insights","toSide":"top","color":"5","label":"洞见"},
+		{"id":"edge9","fromNode":"core_components","fromSide":"right","toNode":"game_management","toSide":"left","color":"3","label":"支撑"},
+		{"id":"edge10","fromNode":"resource_system","fromSide":"bottom","toNode":"practical_summary","toSide":"top","color":"2","label":"应用"}
 	]
 }

@@ -77,6 +77,16 @@ Transform基础      AI逻辑         输入映射       完整复盘
    - 多设备输入适配
    - 输入优化技巧
 
+2. **[[Player-玩家控制]]** - 玩家坦克控制系统详解
+   - WASD 移动与鼠标瞄准
+   - `Input.get_vector()` 统一输入处理
+   - `get_global_mouse_position()` 全局坐标获取
+
+3. **[[PlayerBullet-玩家子弹]]** - 玩家子弹系统解析
+   - 子弹运动与碰撞检测
+   - 组件化设计模式
+   - 资源驱动实例化
+
 #### 练习任务
 - [ ] 添加手柄支持配置
 - [ ] 实现触摸屏虚拟摇杆
@@ -182,6 +192,8 @@ func debug_transform():
 | Enemy-敌人AI | enemy.gd | 第20-26行：`find_player()` 函数 |
 | EnemyBullet-子弹运动 | enemy_bullet.gd | 第6-17行：完整子弹逻辑 |
 | 输入映射配置 | project.godot | 第27-54行：输入动作定义 |
+| Player-玩家控制 | player.gd | 第12-30行：`move()`、`aim()`、`shoot()` 函数 |
+| PlayerBullet-玩家子弹 | player_bullet.gd | 第7行：`position += transform.x * bullet_speed * delta` |
 | 项目实战总结 | 所有文件 | 整体架构分析 |
 
 ## 学习效果检查
