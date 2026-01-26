@@ -10,6 +10,7 @@
 |------|------|------|----------|
 | [[vampire-survivor-solo项目学习/欢迎\| vampire-survivor-solo 项目]] | 吸血鬼幸存者类 | ✅ 已完成 | 组件化设计、技能系统、资源管理 |
 | [[Flappy Bird 项目学习/Flappy Bird 项目学习导航\| Flappy Bird 项目]] | 经典休闲游戏 | ✅ 已完成 | 物理运动、信号系统、性能优化 |
+| [[battle-tank-demo项目学习/欢迎\| Battle Tank Demo 项目]] | 坦克对战演示 | 🚧 开发中 | Transform概念、AI系统、输入配置 |
 
 ### 📚 学习笔记格式
 
@@ -36,6 +37,11 @@
 - **导航**: [[vampire-survivor-solo项目学习/vampire-survivor-solo项目学习导航]]
 - **欢迎**: [[vampire-survivor-solo项目学习/欢迎]]
 
+### Battle Tank Demo 项目
+- **Canvas**: [[battle-tank-demo项目学习/battle-tank-demo项目学习.canvas]]
+- **导航**: [[battle-tank-demo项目学习/battle-tank-demo项目学习导航]]
+- **欢迎**: [[battle-tank-demo项目学习/欢迎]]
+
 ## 核心知识点总结
 
 ### 通用技能
@@ -43,6 +49,7 @@
 - ✅ GDScript 编程基础
 - ✅ 信号与事件系统
 - ✅ 物理引擎使用
+- ✅ Transform与坐标系统（局部/全局坐标）
 
 ### 架构设计
 - ⭐ 组件化设计模式（Composition over Inheritance）
@@ -66,6 +73,7 @@
 ---
 
 > [!note] 更新日志
+> - **2026-01-26**: 新增 Battle Tank Demo 项目笔记，重点讲解 Transform 概念
 > - **2026-01-24**: 新增 Flappy Bird 项目学习笔记和 Canvas
 > - **2026-01-24**: 整理 vampire-survivor-solo 项目笔记，创建导航和 Canvas
 > - **2026-01-24**: 更新主 README，提供完整学习路径
