@@ -51,14 +51,17 @@
                     "id": "5363c972b4a43563",
                     "type": "leaf",
                     "state": {
-                      "type": "markdown",
+                      "type": "canvas",
                       "state": {
-                        "file": "battle-tank-demo项目学习/04_项目实战/坦克对战项目总结.md",
-                        "mode": "source",
-                        "source": false
+                        "file": "battle-tank-demo项目学习/battle-tank-demo项目学习.canvas",
+                        "viewState": {
+                          "x": 72.72409936419095,
+                          "y": 205.12962846950973,
+                          "zoom": -0.5686915071033694
+                        }
                       },
-                      "icon": "lucide-file",
-                      "title": "坦克对战项目总结"
+                      "icon": "lucide-layout-dashboard",
+                      "title": "battle-tank-demo项目学习"
                     }
                   }
                 ],
@@ -444,8 +447,13 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "0c4b5d5edfbde97a",
+  "active": "5363c972b4a43563",
   "lastOpenFiles": [
+    "battle-tank-demo项目学习/battle-tank-demo项目学习.canvas",
+    "Flappy Bird 项目学习/Flappy Bird 项目学习导航.md",
+    "Flappy Bird 项目学习/Flappy Bird 项目学习笔记.md",
+    "Flappy Bird 项目学习/Flappy Bird 项目学习.canvas",
+    "battle-tank-demo项目学习/battle-tank-demo项目学习导航.md",
     "battle-tank-demo项目学习/04_项目实战/坦克对战项目总结.md",
     "battle-tank-demo项目学习/03_玩家系统/Player-玩家控制.md",
     "battle-tank-demo项目学习/03_输入系统/输入映射配置.md",
@@ -453,8 +461,6 @@
     "battle-tank-demo项目学习/02_敌人系统/Enemy-敌人AI.md",
     "battle-tank-demo项目学习/01_核心概念/Transform变换详解.md",
     "battle-tank-demo项目学习/欢迎.md",
-    "battle-tank-demo项目学习/battle-tank-demo项目学习.canvas",
-    "battle-tank-demo项目学习/battle-tank-demo项目学习导航.md",
     "README.md",
     "battle-tank-demo项目学习/03_玩家系统",
     "battle-tank-demo项目学习/04_项目实战",
@@ -462,9 +468,6 @@
     "battle-tank-demo项目学习/02_敌人系统",
     "battle-tank-demo项目学习/01_核心概念",
     "battle-tank-demo项目学习",
-    "Flappy Bird 项目学习/Flappy Bird 项目学习.canvas",
-    "Flappy Bird 项目学习/Flappy Bird 项目学习笔记.md",
-    "Flappy Bird 项目学习/Flappy Bird 项目学习导航.md",
     "vampire-survivor-solo项目学习/vampire-survivor-solo项目学习导航.md",
     "vampire-survivor-solo项目学习/vampire-survivor-solo项目学习.canvas",
     "Flappy Bird 项目学习",
