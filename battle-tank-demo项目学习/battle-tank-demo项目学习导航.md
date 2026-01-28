@@ -1,3 +1,23 @@
+---
+title: Battle Tank Demo 项目学习导航
+date: 2026-01-26
+tags:
+  - godot
+  - gdscript
+  - 学习笔记
+  - battle-tank
+  - transform
+  - canvas
+status: in_progress
+priority: high
+project_type: 坦克对战演示
+learning_focus:
+  - Transform变换概念
+  - 局部坐标与全局坐标
+  - 向量数学应用
+  - look_at瞄准系统
+---
+
 # Battle Tank Demo 项目学习导航
 
 > 系统化学习路径指导，从基础概念到高级应用

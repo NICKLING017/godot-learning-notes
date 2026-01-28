@@ -1,3 +1,15 @@
+---
+title: Godot 游戏开发学习笔记
+date: 2026-01-24
+tags:
+  - godot
+  - gdscript
+  - 学习笔记
+  - 游戏开发
+status: active
+priority: high
+---
+
 # Godot 游戏开发学习笔记
 
 > 多个项目的学习笔记集合，包含详细的项目分析、代码解析和实战总结
@@ -73,6 +85,7 @@
 ---
 
 > [!note] 更新日志
+> - **2026-01-28**: 整理项目笔记，添加统一的frontmatter元数据，优化格式规范
 > - **2026-01-26**: 新增 Battle Tank Demo 项目笔记，重点讲解 Transform 概念
 > - **2026-01-24**: 新增 Flappy Bird 项目学习笔记和 Canvas
 > - **2026-01-24**: 整理 vampire-survivor-solo 项目笔记，创建导航和 Canvas
