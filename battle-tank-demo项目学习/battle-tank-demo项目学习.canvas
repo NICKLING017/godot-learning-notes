@@ -20,6 +20,9 @@
 		{"id":"edge9","fromNode":"transform_concept","fromSide":"bottom","toNode":"player_system","toSide":"top","color":"2","label":"基础"},
 		{"id":"edge10","fromNode":"local_vs_global","fromSide":"bottom","toNode":"player_system","toSide":"top","color":"3","label":"坐标"},
 		{"id":"edge11","fromNode":"look_at_system","fromSide":"bottom","toNode":"player_system","toSide":"top","color":"1","label":"瞄准"},
-		{"id":"edge12","fromNode":"transform_x_application","fromSide":"bottom","toNode":"player_system","toSide":"top","color":"4","label":"移动"},
-	]
+		{"id":"edge12","fromNode":"transform_x_application","fromSide":"bottom","toNode":"player_system","toSide":"top","color":"4","label":"移动"}
+	],
+	"layoutDirection":"LR",
+	"horizontal":true,
+	"groupEdges":true
 }
