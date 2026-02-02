@@ -205,13 +205,150 @@ var last_collision_time = 0.0
 
 func _process(delta: float):
     last_collision_time += delta
-    
+
     # 移动逻辑...
     position += transform.x * bullet_speed * delta
-    
+
     # 条件碰撞检测
     if last_collision_time >= collision_cooldown:
         check_collisions()
+```
+
+### monitoring 属性与 set_deferred() 安全设置
+
+```gdscript
+# monitoring 属性是 Area2D 控制是否持续检测碰撞的开关
+# hit_multiple 控制子弹是否可命中多个目标
+@export var hit_multiple: bool = false  # 默认只命中一次
+var has_hit: bool = false  # 标记是否已命中
+
+func _on_area_entered(area: Area2D) -> void:
+    if area.is_in_group("Player"):
+        if not hit_multiple and has_hit:
+            return  # 已命中过且不允许穿透，直接返回
+
+        print_debug("子弹命中玩家")
+        handle_player_hit(area)
+
+        if not hit_multiple:
+            # 第一次命中后关闭碰撞检测，防止重复触发
+            # 使用 set_deferred() 延迟设置，避免在回调中直接修改属性导致的冲突
+            set_deferred("monitoring", false)
+            has_hit = true
+        else:
+            # 穿透弹：允许命中多个目标，保持碰撞检测开启
+            # 可添加短暂无敌帧避免重复检测同一目标
+            create_penetration_cooldown()
+
+func create_penetration_cooldown():
+    collision_mask = 0  # 临时禁用碰撞检测
+    await get_tree().create_timer(0.05).timeout
+    collision_mask = 1  # 恢复碰撞检测
+```
+
+#### monitoring 属性详解
+
+`monitoring` 是 Area2D 的布尔属性，用于控制是否持续进行碰撞检测：
+
+| 值 | 效果 |
+|---|------|
+| `true` | Area2D 持续检测进入其区域的物体（默认） |
+| `false` | 关闭碰撞检测，不再触发 `area_entered` 信号 |
+
+**典型应用场景**：
+- 单次命中子弹：第一次命中后关闭 `monitoring`，防止重复触发
+- 弹药拾取物：检测到玩家后立即关闭，避免重复检测
+- 区域触发器：触发一次后不再响应
+
+#### set_deferred() 详解
+
+`set_deferred()` 是 Godot 中延迟设置属性的函数，语法：
+
+```gdscript
+set_deferred("property_name", value)
+```
+
+**核心作用**：将属性修改推迟到安全的时机执行（通常是下一帧），避免在特殊生命周期阶段直接修改属性导致的冲突或崩溃。
+
+**何时必须使用 set_deferred()**：
+
+| 场景 | 直接修改风险 | 使用 set_deferred() 原因 |
+|------|-------------|------------------------|
+| 信号回调中（如 `_on_area_entered`） | 可能与引擎内部状态冲突 | 等待回调结束后再修改 |
+| 物理过程回调中 | 可能破坏物理计算 | 确保物理引擎处于安全状态 |
+| `_ready()` 中某些属性 | 场景树尚未完全建立 | 等场景树初始化完成 |
+| 多线程操作中 | 线程安全问题 | 主线程安全时机执行 |
+
+**实际示例对比**：
+
+```gdscript
+# ❌ 危险：在信号回调中直接修改 monitoring
+func _on_area_entered(area: Area2D) -> void:
+    monitoring = false  # 可能导致错误
+
+# ✅ 安全：使用 set_deferred() 延迟修改
+func _on_area_entered(area: Area2D) -> void:
+    set_deferred("monitoring", false)  # 等回调结束后执行
+```
+
+**工作原理**：
+1. 调用 `set_deferred()` 时，属性不会立即改变
+2. Godot 将修改请求放入延迟队列
+3. 在当前代码执行完毕后、下帧开始前的安全时机执行
+4. 此时引擎已完成所有内部状态更新，不会产生冲突
+
+#### 单次命中 vs 穿透群伤策略
+
+| 策略 | monitoring 设置 | hit_multiple | 适用场景 |
+|------|-----------------|--------------|---------|
+| 单次命中 | 第一次命中后设为 `false` | `false` | 普通子弹、追踪弹 |
+| 穿透群伤 | 始终保持 `true` | `true` | 霰弹枪、爆炸范围技能 |
+| 短暂无敌帧 | 命中后短暂禁用碰撞 | `true` | 防止单次接触重复判定 |
+
+**完整子弹逻辑示例**：
+
+```gdscript
+extends Area2D
+
+@export var speed: float = 300.0
+@export var damage: int = 10
+@export var hit_multiple: bool = false  # 是否穿透
+@export var cooldown_time: float = 0.05  # 穿透无敌帧时长
+
+var has_hit_target: bool = false
+
+func _ready():
+    # 子弹飞出屏幕时自动销毁
+    $VisibleOnScreenNotifier2D.screen_exited.connect(_on_screen_exited)
+
+func _process(delta: float):
+    position += transform.x * speed * delta
+
+func _on_area_entered(area: Area2D) -> void:
+    if area.is_in_group("Player"):
+        if not hit_multiple and has_hit_target:
+            return
+
+        # 造成伤害
+        if area.has_method("take_damage"):
+            area.take_damage(damage)
+
+        if hit_multiple:
+            # 穿透弹：添加短暂无敌帧
+            _create_penetration_cooldown()
+        else:
+            # 单发弹：关闭碰撞检测
+            has_hit_target = true
+            set_deferred("monitoring", false)
+            queue_free()
+
+func _create_penetration_cooldown():
+    set_deferred("monitoring", false)
+    await get_tree().create_timer(cooldown_time).timeout
+    set_deferred("monitoring", true)
+
+func _on_screen_exited() -> void:
+    queue_free()
 ```
 
 ## 性能优化技巧
