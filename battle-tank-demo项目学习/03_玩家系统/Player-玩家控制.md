@@ -1,6 +1,21 @@
+---
+title: Player 玩家控制
+date: 2026-01-26
+tags:
+  - godot
+  - player-control
+  - movement
+  - input-handling
+category: 玩家系统
+updated: 2026-01-26
+related:
+  - "[[Enemy-敌人AI]]"
+  - "[[EnemyBullet-子弹运动]]"
+---
+
 # Player 玩家控制系统
 
-> 坦克玩家的移动、瞄准与射击系统实现，展示 Input.get_vector() 和 rotate_toward() 的使用
+> 坦克玩家的移动、瞄准与射击系统实现，展示 `Input.get_vector()` 和 `rotate_toward()` 的使用
 
 ## 目录
 - [节点结构](#节点结构)
@@ -14,7 +29,16 @@
 
 ## 节点结构
 
-### 场景树层级
+> [!info] 场景树层级
+```
+Player (Area2D)
+├── Sprite2D (玩家坦克车身)
+├── Gun (Sprite2D)
+│   └── Marker2D (子弹生成点)
+└── VisibleOnScreenNotifier2D (可选)
+```
+
+### 组件说明
 ```
 Player (Area2D)
 ├── Sprite2D (玩家坦克车身)
@@ -410,6 +434,9 @@ class PlayerStatus:
                 effects.remove_at(i)
 ```
 
+> [!warning] 调试与测试
+> 以下调试技巧可帮助你排查玩家控制系统的问题。
+
 ## 调试与测试
 
 ### 1. 输入可视化
@@ -498,6 +525,15 @@ func _on_area_entered_debug(area: Area2D):
 - 使用对象池减少实例化
 - 距离检查避免不必要的计算
 
+> [!success] 最佳实践总结
+> - 使用 `Input.get_vector()` 统一多设备输入
+> - `rotate_toward()` 实现平滑旋转
+> - `move_toward()` 实现平滑加速/减速
+> - `transform.x` 进行方向移动
+> - `get_global_mouse_position()` 获取鼠标位置
+> - `look_at()` 实现自动瞄准
+> - 使用对象池优化子弹实例化
+
 ## 学习收获
 
 ### 核心技术
@@ -519,4 +555,18 @@ func _on_area_entered_debug(area: Area2D):
 
 ---
 
-*返回 [[欢迎|项目主页]]*
+## 相关笔记
+
+- [[../欢迎|项目主页]]
+- [[Enemy-敌人AI]]
+- [[../04_项目实战/坦克运动战功能总结|坦克运动战功能总结]]
+
+---
+
+*最后更新：2026-01-26*
+
+%% 
+内部笔记：
+- 考虑添加性能监控面板
+- 补充视频教程链接
+%%
