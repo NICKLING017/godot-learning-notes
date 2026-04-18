@@ -20,9 +20,10 @@ priority: high
 
 | 项目 | 类型 | 状态 | 学习重点 |
 |------|------|------|----------|
-| [[vampire-survivor-solo项目学习/欢迎\| vampire-survivor-solo 项目]] | 吸血鬼幸存者类 | ✅ 已完成 | 组件化设计、技能系统、资源管理 |
-| [[Flappy Bird 项目学习/Flappy Bird 项目学习导航\| Flappy Bird 项目]] | 经典休闲游戏 | ✅ 已完成 | 物理运动、信号系统、性能优化 |
-| [[battle-tank-demo项目学习/欢迎\| Battle Tank Demo 项目]] | 坦克对战演示 | 🚧 开发中 | Transform概念、AI系统、输入配置 |
+| [[vampire-survivor-solo项目学习/欢迎| vampire-survivor-solo 项目]] | 吸血鬼幸存者类 | ✅ 已完成 | 组件化设计、技能系统、资源管理 |
+| [[Flappy Bird 项目学习/Flappy Bird 项目学习导航| Flappy Bird 项目]] | 经典休闲游戏 | ✅ 已完成 | 物理运动、信号系统、性能优化 |
+| [[battle-tank-demo项目学习/欢迎| Battle Tank Demo 项目]] | 坦克对战演示 | 🚧 开发中 | Transform概念、AI系统、输入配置 |
+| [[enter-the-dungeon-demo项目学习/欢迎| Enter The Dungeon Demo 项目]] | 地牢探索动作游戏 | 🆕 新增 | 多角色选择、武器系统、本地化、存档系统 |
 
 ### 📚 学习笔记格式
 
@@ -53,6 +54,9 @@ priority: high
 - **Canvas**: [[battle-tank-demo项目学习/battle-tank-demo项目学习.canvas]]
 - **导航**: [[battle-tank-demo项目学习/battle-tank-demo项目学习导航]]
 - **欢迎**: [[battle-tank-demo项目学习/欢迎]]
+
+### Enter The Dungeon Demo 项目
+- **笔记**: [[enter-the-dungeon-demo项目学习/欢迎]]
 
 ## 核心知识点总结
 
@@ -85,6 +89,7 @@ priority: high
 ---
 
 > [!note] 更新日志
+> - **2026-02-24**: 新增 Enter The Dungeon Demo 项目笔记，学习多角色系统、武器系统、本地化
 > - **2026-01-28**: 整理项目笔记，添加统一的frontmatter元数据，优化格式规范
 > - **2026-01-26**: 新增 Battle Tank Demo 项目笔记，重点讲解 Transform 概念
 > - **2026-01-24**: 新增 Flappy Bird 项目学习笔记和 Canvas
